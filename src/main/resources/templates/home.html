@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WorldCLock</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-dark text-center" th:text="'Current time: ' + ${#temporals.format(currentDateTime, 'HH:mm:ss')}"></h4>
+            <h4 class="text-dark text-center" th:text="'Current date: ' + ${#temporals.format(currentDateTime, 'yyyy-MM-dd')}"></h4>
+            <h4 class="text-dark text-center" th:text="'Today is ' + ${#temporals.dayOfWeekName(currentDateTime)}"></h4>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

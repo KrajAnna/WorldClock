@@ -14,10 +14,21 @@ public class TimezoneController {
     }
 
     @GetMapping("")
-    @ResponseBody
     public String getHome() {
-        timezoneRepository.createTable();
-        return "Elo";
+       // timezoneRepository.createTable();
+        return "welcome";
+    }
+
+    @GetMapping("/select")
+    public String selectTimezone() {
+        // timezoneRepository.createTable();
+        return "welcome";
+    }
+
+    @GetMapping("/home")
+    public String homeView() {
+        // timezoneRepository.createTable();
+        return "home";
     }
 
 }
