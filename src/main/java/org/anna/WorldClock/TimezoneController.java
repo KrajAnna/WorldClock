@@ -1,16 +1,19 @@
 package org.anna.WorldClock;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.LocalDateTime;
 
 @Controller
 public class TimezoneController {
 
-    private final TimezoneRepository timezoneRepository;
+    private final TimezoneService timezoneService;
 
-    public TimezoneController(TimezoneRepository timezoneRepository) {
-        this.timezoneRepository = timezoneRepository;
+    public TimezoneController(TimezoneService timezoneService) {
+        this.timezoneService = timezoneService;
     }
 
     @GetMapping("")
@@ -19,10 +22,18 @@ public class TimezoneController {
         return "welcome";
     }
 
-    @GetMapping("/select")
-    public String selectTimezone() {
+    @GetMapping("/app")
+    public String useApp(Model model) {
+        timezoneService.loadDataToDatabase();
+        model.addAttribute("currentDateTime", LocalDateTime.now());
+        return "home";
+    }
+
+    @GetMapping("/farewell")
+    public String leaveApp() {
         // timezoneRepository.createTable();
-        return "welcome";
+
+        return "farewell";
     }
 
     @GetMapping("/home")
