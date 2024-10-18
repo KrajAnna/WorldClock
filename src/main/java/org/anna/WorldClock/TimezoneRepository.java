@@ -13,9 +13,14 @@ public class TimezoneRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    private final String INSERT_QUERY = "INSERT INTO timezones(countryCode, countryZone, gmtOffset) VALUES (?, ?, ?)";
+    private final String SELECT_ALL_QUERY = "SELECT * FROM timezones";
+    private final String SELECT_QUERY = "SELECT * FROM timezones WHERE id = ? Limit 1";
+
     public TimezoneRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
 
     public void createTable(){
         jdbcTemplate.execute("DROP TABLE IF EXISTS timezones");
@@ -32,10 +37,11 @@ public class TimezoneRepository {
                 .map(t -> new Object[] { t.getCountryCode(),t.getCountryZone(),t.getGmtOffset()})
                 .collect(Collectors.toList());
 
-        jdbcTemplate.batchUpdate(
-                "INSERT INTO timezones(countryCode, countryZone, gmtOffset) VALUES (?, ?, ?)",
-                batchArgs
-        );
+        jdbcTemplate.batchUpdate(INSERT_QUERY, batchArgs);
+    }
+
+    public Timezone getTimezone(Long id){
+        return jdbcTemplate.queryForObject(SELECT_QUERY, new Object[]{id}, new TimezoneRowMapper());
     }
 
 
