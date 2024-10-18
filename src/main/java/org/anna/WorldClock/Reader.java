@@ -26,6 +26,7 @@ public class Reader {
                 timezone.setCountryCode(splitLine(line)[0]);
                 timezone.setCountryZone(splitLine(line)[1]);
                 timezone.setGmtOffset(Float.parseFloat(splitLine(line)[2]));
+                timezones.add(timezone);
             }
         } catch (IOException e) {
             e.printStackTrace();
