@@ -1,4 +1,4 @@
-package org.anna.WorldClock;
+package org.anna.WorldClock.entity;
 
 import lombok.Data;
 

@@ -1,10 +1,9 @@
-package org.anna.WorldClock;
+package org.anna.WorldClock.util;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.anna.WorldClock.entity.Timezone;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Reader {
 
     private String filepath = "timezones.txt";
 
-    protected List<Timezone> readFile() {
+    public List<Timezone> readFile() {
         List<Timezone> timezones = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filepath));
