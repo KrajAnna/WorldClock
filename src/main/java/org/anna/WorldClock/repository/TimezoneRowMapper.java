@@ -1,5 +1,6 @@
-package org.anna.WorldClock;
+package org.anna.WorldClock.repository;
 
+import org.anna.WorldClock.entity.Timezone;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -11,7 +12,8 @@ public class TimezoneRowMapper implements RowMapper<Timezone> {
         Timezone timezone = new Timezone();
         timezone.setCountryCode(rs.getString("countryCode"));
         timezone.setCountryZone(rs.getString("countryZone"));
-        timezone.setCountryCode(rs.getString("gmtOffset"));
+        timezone.setGmtOffset(rs.getFloat("gmtOffset"));
+        timezone.setId(rs.getInt("id"));
         return timezone;
     }
 }

@@ -1,5 +1,7 @@
-package org.anna.WorldClock;
+package org.anna.WorldClock.repository;
 
+import org.anna.WorldClock.entity.Timezone;
+import org.anna.WorldClock.util.Reader;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -40,8 +42,14 @@ public class TimezoneRepository {
         jdbcTemplate.batchUpdate(INSERT_QUERY, batchArgs);
     }
 
-    public Timezone getTimezone(Long id){
+    public Timezone getTimezoneById(Long id){
         return jdbcTemplate.queryForObject(SELECT_QUERY, new Object[]{id}, new TimezoneRowMapper());
+    }
+
+    public List<Timezone> getAllTimezones(){
+        List<Timezone> timezones = jdbcTemplate.query(SELECT_ALL_QUERY, new TimezoneRowMapper());
+        timezones.forEach(System.out::println);
+        return timezones;
     }
 
 
